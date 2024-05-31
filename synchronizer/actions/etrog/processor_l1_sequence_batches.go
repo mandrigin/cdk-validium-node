@@ -356,11 +356,15 @@ func (p *ProcessorL1SequenceBatchesEtrog) checkTrustedState(ctx context.Context,
 	//Compare virtual state with trusted state
 	var reorgReasons strings.Builder
 	batchNumStr := fmt.Sprintf("Batch: %d.", batch.BatchNumber)
+	/*
 	if newRoot != tBatch.StateRoot {
 		errMsg := batchNumStr + fmt.Sprintf("Different field StateRoot. Virtual: %s, Trusted: %s\n", newRoot.String(), tBatch.StateRoot.String())
 		log.Warnf(errMsg)
 		reorgReasons.WriteString(errMsg)
 	}
+	*/
+	log.Warnf("Skipping the state root check!")
+
 	if hex.EncodeToString(batch.BatchL2Data) != hex.EncodeToString(tBatch.BatchL2Data) {
 		errMsg := batchNumStr + fmt.Sprintf("Different field BatchL2Data. Virtual: %s, Trusted: %s\n", hex.EncodeToString(batch.BatchL2Data), hex.EncodeToString(tBatch.BatchL2Data))
 		log.Warnf(errMsg)
